@@ -13,11 +13,7 @@
 
   <?php
     if (isset($_GET["form_submitted"])) {
-      $servername = "localhost";
-      $username = "sopatz";
-      $password = "p67CahFd";
-      $dbname = "sopatz";
-
+      include '/users/kent/student/sopatz/config.inc';
       $conn = new mysqli($servername, $username, $password, $dbname);
 
       if ($conn->connect_error) {
