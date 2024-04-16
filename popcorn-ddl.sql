@@ -13,9 +13,9 @@ create table user
     (ID               int not null auto_increment,
      username         varchar(30) not null unique,
      password         varchar(30) not null,
-     subsc_plan       varchar(10),
+     subsc_plan       varchar(10) not null,
      subsc_renew_date date,
-     location         varchar(60),
+     location         varchar(60) not null,
      primary key (ID)
     );
 
