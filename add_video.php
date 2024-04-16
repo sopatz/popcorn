@@ -3,10 +3,6 @@
     <head> </head>
     <body>
 
-    <?php
-        include '/users/kent/student/sopatz/config.inc';
-    ?>
-
         <form action="add_vidser.php" method=get>
             Enter title of video: <input type=text size=100 name="title"><p></p>
             Enter synopsis: <input type=textarea size=100 name="synopsis"><p></p>
@@ -48,6 +44,17 @@
             <p></p><input type=submit value="Submit">
             <input type=hidden name="form_submitted" value="1">
         </form>
+        <?php
+            include '/users/kent/student/sopatz/config.inc';
+            if (isset($_GET["form_submitted"])) {
+                $conn = new mysqli($servername, $username, $password, $dbname);
+                if ($conn->connect_error) {
+                    die("Connection Failed: " . $conn->connect_error);
+                }
+                //SQL stuff here
+            }
+        ?>
+
     </body>
 
 </html>

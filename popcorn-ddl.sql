@@ -3,8 +3,8 @@ create table series
      title               varchar(100) not null,
      synopsis            varchar(1000),
      rating              numeric(2, 1) check (rating >= 0),
-     thumbnail_reference varchar(100),
-     num_of_eps          numeric(4),
+     thumbnail_reference varchar(1000),
+     num_of_eps          numeric(3),
      num_of_seasons      numeric(2),
      primary key (ID)
     );
@@ -24,7 +24,7 @@ create table video
      title               varchar(100) not null,
      synopsis            varchar(1000),
      runtime             time,
-     thumbnail_reference varchar(100),
+     thumbnail_reference varchar(1000),
      rating              numeric(2, 1) check (rating >= 0),
      subsc_plan_required varchar(10) not null,
      vid_type            varchar(7) not null,
