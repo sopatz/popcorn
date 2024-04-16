@@ -1,6 +1,6 @@
 create table series
     (ID                  int not null auto_increment,
-     title               varchar(100),
+     title               varchar(100) not null,
      synopsis            varchar(1000),
      rating              numeric(2, 1) check (rating >= 0),
      thumbnail_reference varchar(100),
@@ -21,13 +21,13 @@ create table user
 
 create table video
     (ID                  int not null auto_increment,
-     title               varchar(100),
+     title               varchar(100) not null,
      synopsis            varchar(1000),
      runtime             time,
      thumbnail_reference varchar(100),
      rating              numeric(2, 1) check (rating >= 0),
-     subsc_plan_required varchar(10),
-     vid_type            varchar(7),
+     subsc_plan_required varchar(10) not null,
+     vid_type            varchar(7) not null,
      genre               varchar(20),
      primary key(ID)
     );
