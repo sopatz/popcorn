@@ -27,6 +27,7 @@ create table video
      thumbnail_reference varchar(1000),
      rating              numeric(2, 1) check (rating >= 0),
      subsc_plan_required varchar(10) not null,
+     video_reference     varchar(100) not null,
      vid_type            varchar(7) not null,
      genre               varchar(20),
      primary key(ID)
