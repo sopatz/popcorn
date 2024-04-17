@@ -51,7 +51,11 @@
                 if ($conn->connect_error) {
                     die("Connection Failed: " . $conn->connect_error);
                 }
-                //SQL stuff here
+
+                //Sanitizing text variables to prevent SQL injection
+                $title = $conn->real_escape_string($_GET["title"]);
+                $synopsis = $conn->real_escape_string($_GET["synopsis"]);
+                $runtime = $conn->real_escape_string($_GET["runtime"]);
             }
         ?>
 
