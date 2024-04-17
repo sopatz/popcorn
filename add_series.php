@@ -15,11 +15,29 @@
         <?php
             include '/users/kent/student/sopatz/config.inc';
             if (isset($_GET["form_submitted"])) {
-                $conn = new mysqli($servername, $username, $password, $dbname);
-                if ($conn->connect_error) {
-                    die("Connection Failed: " . $conn->connect_error);
+                if ($_GET["title"] == "") {
+                    echo "A title is required, please try again.";
                 }
-                //SQL stuff here
+                else {
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+                    if ($conn->connect_error) {
+                        die("Connection Failed: " . $conn->connect_error);
+                    }
+
+                    $title = $conn->real_escape_string($_GET["title"]);
+                    $synopsis = $conn->real_escape_string($_GET["synopsis"]);
+                    $thumb_ref = $conn->real_escape_string($_GET["synopsis"]);
+
+                    $insert = "INSERT INTO series (title, synopsis, rating, thumbnail_reference) VALUES ('" . $title . "', '" . $synopsis . "', '" . $_GET["rating"] . "', '" . $thumb_ref . "')";
+                    $result = $conn->query($insert);
+
+                    if (is_null($result->fetch_assoc()["ID"])) {
+                        echo "Series failed to add, please try again";
+                    }
+                    else echo "The series has been successfully submitted";
+                }
+
+                $conn->close();
             }
         ?>
 
