@@ -3,11 +3,12 @@
     <head> </head>
     <body>
 
-        <form action="add_vidser.php" method=get>
-            Enter title of video: <input type=text size=100 name="title"><p></p>
-            Enter synopsis: <input type=textarea size=100 name="synopsis"><p></p>
-            What is the video's runtime? <input type=text size=6 name="runtime" placeholder="hh:mm:ss"><p></p>
-            Link to Thumbnail: <input type=text size=50 name="thumb_ref"><p></p>
+        <form action="add_video.php" method=get>
+            Title of Video: <input type=text size=50 name="title"><p></p>
+            Synopsis: <input type=textarea size=100 name="synopsis"><p></p>
+            What is the video's runtime? <input type=text size=5 name="runtime" placeholder="hh:mm:ss"><p></p>
+            Thumbnail Reference: <input type=text size=30 name="thumb_ref" placeholder="images/..."><p></p>
+            Video Reference: <input type=text size=30 name="vid_ref"><p></p>
             Rating: <input type=number name="rating" min="0" max="5" step="0.1" placeholder="X.X"><p></p>
             Subscription Plan Required to Watch:<br>
             <input type=radio id="basic" name="subsc_plan" value="basic">
@@ -39,6 +40,7 @@
                 <option value="western">Western</option>
             </select><p></p><hr>
             Add Video to Series:<p></p>
+            Series ID: <input type=number name="series_ID" min="1" max="99999" step="1"><p></p>
             Season Number: <input type=number name="season_number" min="1" max="99" step="1"><p></p>
             Episode Number: <input type=number name="episode_number" min="0" max="999" step="1"><p></p>
             <p></p><input type=submit value="Submit">
@@ -56,6 +58,37 @@
                 $title = $conn->real_escape_string($_GET["title"]);
                 $synopsis = $conn->real_escape_string($_GET["synopsis"]);
                 $runtime = $conn->real_escape_string($_GET["runtime"]);
+                $thumb_ref = $conn->real_escape_string($_GET["thumb_ref"]);
+                $vid_ref = $conn->real_escape_string($_GET["vid_ref"]);
+
+                //Variables that do not need to be sanitized
+                $rating = $_GET["rating"];
+                $subsc_plan = $_GET["subsc_plan"];
+                $vid_type = $_GET["vid_type"];
+                $genre = $_GET["genre"];
+
+                $insert_video = "INSERT INTO video (title, synopsis, runtime, thumbnail_reference, video_reference, rating, subsc_plan_required, vid_type, genre)
+                                 VALUES ('" . $title . "', '" . $synopsis . "', '" . $runtime . "', '" . $thumb_ref . "', '" . $vid_ref . "', '" . $rating . "', '" . $subsc_plan . "', '" . $vid_type . "', '" . $genre . "')";
+                $result = $conn->query($insert_video);
+
+                if ($result != 1) {
+                    echo "Video failed to add, please try again";
+                }
+                else {
+                    echo "The video has been successfully submitted";
+                    $result = $conn->query("SELECT MAX(ID) FROM video");
+                    $video_ID = $result->fetch_assoc()["MAX(ID)"];
+                    $series_ID = $_GET["series_ID"];
+                    $season_number = $_GET["season_number"];
+                    $episode_number = $_GET["episode_number"];
+
+                    $insert_into_series = "INSERT INTO is_part_of VALUES('" . $video_ID . "', '" . $series_ID . "', '" . $season_number . "', '" . $episode_number . "')";
+                    $result = $conn->query($insert_into_series);
+                    if ($result == 1) echo "<p>Video successfully added to series</p>";
+                    else echo "<p>Video could not be added to series</p>";
+                }
+
+                $conn->close();
             }
         ?>
 

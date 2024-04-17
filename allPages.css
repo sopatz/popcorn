@@ -30,3 +30,18 @@ body {
   margin-top: -40px;
   float: left;
 }
+
+.popbutton {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.popbutton:hover {
+    background-color:#555555;
+    color:black;
+}

@@ -31,10 +31,10 @@
                     $insert = "INSERT INTO series (title, synopsis, rating, thumbnail_reference) VALUES ('" . $title . "', '" . $synopsis . "', '" . $_GET["rating"] . "', '" . $thumb_ref . "')";
                     $result = $conn->query($insert);
 
-                    if (is_null($result->fetch_assoc()["ID"])) {
-                        echo "Series failed to add, please try again";
+                    if ($result == 1) {
+                        echo "The series has been successfully submitted";
                     }
-                    else echo "The series has been successfully submitted";
+                    else echo "Series failed to add, please try again";
                 }
 
                 $conn->close();
