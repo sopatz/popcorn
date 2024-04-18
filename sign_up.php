@@ -32,7 +32,6 @@
                 <option value="Belgium">Belgium</option>
                 <option value="Belize">Belize</option>
                 <option value="Benin">Benin</option>
-                <option value="Bermuda">Bermuda</option>
                 <option value="Bhutan">Bhutan</option>
                 <option value="Bolivia">Bolivia</option>
                 <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
@@ -232,8 +231,16 @@
         }
         if ($_GET["username"] ==  "" || $_GET["password"] == "") echo "Sign-up failed, please enter a valid username/password";
         else {
-          $sql = "INSERT INTO user (username, password, subsc_plan, location) VALUES ('" . $_GET["username"] . "', '" . $_GET["password"] . "', '" . $_GET["subsc_plan"] . "', '" . $_GET["country"] . "');";
-          $result = $conn->query($sql);
+          //Sanitizing inputs to protect from SQL injection
+          $user_username = $conn->real_escape_string($_GET["username"]);
+          $user_password = $conn->real_escape_string($_GET["password"]);
+          $subsc_plan = $conn->real_escape_string($_GET["subsc_plan"]);
+          $location = $conn->real_escape_string($_GET["country"]);
+          $renew_date = date("Y-m-d", strtotime('+1 year'));
+
+          $insert_user = "INSERT INTO user (username, password, subsc_plan, location, subsc_renew_date) VALUES ('" . $user_username . "', '" . $user_password . "', '" . $subsc_plan . "', '" . $location . "', '" . $renew_date . "');";
+          $result = $conn->query($insert_user);
+
           if ($result == 1) echo "Thank you, you have successfully signed up for Popcorn<p>You can now log in using your info below:";
           else echo "That username has already been taken, please try a different one";
         }
