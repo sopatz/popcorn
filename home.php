@@ -53,7 +53,7 @@ h2 {
   <img src="images/logo2.png" alt="popcorn graphic" class="logo">
     <ul class ="nav">
       <li><a href="home.php">Home</a></li>
-      <li><a href="movies_list.html">Favorites</a></li>
+      <li><a href="watchlist.php">Watchlist</a></li>
       <li><a href="#account">Account</a></li>
       <li><a href="#settings">Settings</a></li>
     </ul>

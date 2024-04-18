@@ -37,8 +37,9 @@ body {
     border: 2px solid white;
     cursor: pointer;
     transition-duration: 0.3s;
-    border-radius: 5px;
+    border-radius: 10px;
     text-decoration: none;
+    font-size:20px;
 }
 
 .popbutton:hover {
