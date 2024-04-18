@@ -19,7 +19,11 @@
       if ($conn->connect_error) {
           die("Connection Failed: " . $conn->connect_error);
       }
-      $sql = "SELECT * FROM user WHERE username = '" . $_GET["username"] . "' AND password = '" . $_GET["password"] . "'";
+
+      $check_username = $conn->real_escape_string($_GET["username"]);
+      $check_password = $conn->real_escape_string($_GET["password"]);
+
+      $sql = "SELECT * FROM user WHERE username = '" . $check_username . "' AND password = '" . $check_password . "'";
       $result = $conn->query($sql);
       $user_ID = $result->fetch_assoc()["ID"];
       $conn->close();
