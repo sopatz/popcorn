@@ -1,6 +1,6 @@
-<html>
+<!Doctype html>
 <head>
-<title>Sample Video Player</title>
+<title>Movies List</title>
 <link rel="stylesheet" href="allPages.css">
 <style>
 h1 {
@@ -43,14 +43,34 @@ th{
     </section>
 
     <h1>Movies</h1>
-<table>
-      <tr>
-          <th><a href="Pages/movieId0.html">test1.txt</a></th>
-      </tr>
-      <tr>
-          <th><a href="Pages/movieId1.html">test2.txt</a></th>
-      </tr>
-      <tr>
-          <th><a href="Pages/movieId2.html">test.txt</a></th>
-      </tr>
-</table></body>
+<?php
+
+include '../config.inc';
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error){
+  echo '<p>Connetcion Failed!</p>';
+  die("Connetction Failed:" . $conn->connect_error);
+}
+
+
+
+$query = "SELECT * FROM video WHERE vid_type = 'movie'";
+$result = $conn->query($query);
+echo '<table>';
+
+ while ($row = $result->fetch_assoc()) {
+    echo "<tr>";
+        echo "<th><img src=".$row[thumbnail_reference]."></th>";
+        echo "<th>".$row[title]."</th>";
+        echo "<th>".$row[rating]."</th>";
+        echo "<th>".$row[runtime]. "</th>";
+    echo "</tr>";
+
+}
+
+echo '</table>';
+
+
+?>
+</body>
