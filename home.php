@@ -1,12 +1,12 @@
 <html>
 <head>
-<title>Sample Video Player</title>
+<title>Home Page</title>
 <link rel="stylesheet" href="allPages.css">
 <style>
 
 .center{
-  width: 65%;
-  margin: auto;
+  position: absolute;
+  left: 28%;
 }
 
 h1 {
@@ -15,7 +15,7 @@ h1 {
   font-size: 40px;
   text-align: center;
   width: auto;
-  margin-top: 30PX;
+  margin-top: 30px;
 }
 
 h2 {
@@ -25,12 +25,14 @@ h2 {
   text-align: center;
   width: auto;
   margin: auto;
+  position:relative;
+  left: 25%;
 }
 
 
 .movies {
   float: left;
-  padding: px;
+  padding: 0px;
   width: 33%;
 }
 
@@ -38,12 +40,8 @@ h2 {
   float: left;
   padding: 0px;
   width: 33%;
-}
-
-.documentaries {
-  float: left;
-  padding: 0px;
-  width: 33%;
+  position:relative;
+  left: 25%;
 }
 
 </style>
@@ -52,7 +50,7 @@ h2 {
 <body>
 <section>
 <div>
-  <img src="images/logo2.png" alt="" class="logo">
+  <img src="images/logo2.png" alt="popcorn graphic" class="logo">
     <ul class ="nav">
       <li><a href="home.php">Home</a></li>
       <li><a href="movies_list.html">Favorites</a></li>
@@ -72,16 +70,12 @@ h2 {
 
 <div class="center">
   <section class="movies">
-    <img src="images/placeholder.png" alt="" class="mainpics">
-    <h2>Movies</h1>
+    <img src="images/placeholder.png" alt="movie pic">
+    <h2>Movies</h2>
   </section>
   <section class="tv">
-    <img src="images/placeholder.png" alt="" class="mainpics">
-    <h2>Tv</h1>
-  </section>
-  <section class="documentaries">
-    <img src="images/placeholder.png" alt="" class="mainpics">
-    <h2>Documentaries</h1>
+    <img src="images/placeholder.png" alt="tv pic">
+    <h2>Tv</h2>
   </section>
 </div>
 
