@@ -13,7 +13,7 @@
 
   <?php
     if (isset($_GET["form_submitted"])) {
-      include '/users/kent/student/sopatz/config.inc';
+      include '../config.inc';
       $conn = new mysqli($servername, $username, $password, $dbname);
 
       if ($conn->connect_error) {

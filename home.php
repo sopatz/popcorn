@@ -29,7 +29,6 @@ h2 {
   left: 25%;
 }
 
-
 .movies {
   float: left;
   padding: 0px;
@@ -62,20 +61,20 @@ h2 {
 
 <h1>Welcome to Popcorn</h1>
 
-<?php
+<?php //This is how to pass the user's ID to any page
   session_start();
   $user_ID = $_SESSION["user_ID"];
-  echo "Your user ID is " . $user_ID;
+  echo "Your user ID is " . $user_ID; //Just for testing purposes
 ?>
 
 <div class="center">
   <section class="movies">
-    <img src="images/placeholder.png" alt="movie pic">
-    <h2>Movies</h2>
+    <a href="movies_list.php"><img src="images/placeholder.png" alt="movie pic"></a>
+    <h2><a href="movies_list.php" style="text-decoration:none; color:black;">Movies</a></h2>
   </section>
   <section class="tv">
-    <img src="images/placeholder.png" alt="tv pic">
-    <h2>Tv</h2>
+    <a href="series_list.php"><img src="images/placeholder.png" alt="tv pic"></a>
+    <h2><a href="series_list.php" style="text-decoration:none; color:black;">Tv</a></h2>
   </section>
 </div>
 

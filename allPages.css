@@ -10,7 +10,6 @@ body {
   margin-top: 50px;
   padding: 0px;
   border-radius: 5px;
-  
 }
 
 .nav li {
@@ -19,11 +18,16 @@ body {
   padding: 15px;
   border-radius: 10px;
   font-size: 20px;
-  
+  border: 2px solid white;
+  transition-duration: 0.3s;
+  cursor: pointer;
 }
 
 .nav a{
   color: #ffffff;
+  padding: 15px 3px;
+  transition-duration: 0.3s;
+  text-decoration: none;
 }
 
 .logo {
@@ -44,5 +48,13 @@ body {
 
 .popbutton:hover {
     background-color:#555555;
+    color:black;
+}
+
+.nav li:hover {
+    background-color:#555555;
+}
+
+.nav a:hover {
     color:black;
 }

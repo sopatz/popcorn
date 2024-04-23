@@ -1,4 +1,4 @@
-<!Doctype html>
+<html>
 <head>
 <title>Movies List</title>
 <link rel="stylesheet" href="allPages.css">
@@ -34,17 +34,17 @@ th{
     <div>
       <img src="images/logo2.png" alt="" class="logo">
         <ul class ="nav">
-          <li><a href="home.html">Home</a></li>
-          <li><a href="test.html">Favorites</a></li>
+          <li><a href="home.php">Home</a></li>
+          <li><a href="watchlist.php">Watchlist</a></li>
           <li><a href="#account">Account</a></li>
           <li><a href="#settings">Settings</a></li>
         </ul>
-      </div> 
+      </div>
     </section>
-
+    <a href="start.html" class="popbutton" style="padding:15px; position:absolute; right:3%; top:50px">Logout</a>
     <h1>Movies</h1>
-<?php
 
+<?php
 include '../config.inc';
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -52,8 +52,6 @@ if ($conn->connect_error){
   echo '<p>Connetcion Failed!</p>';
   die("Connetction Failed:" . $conn->connect_error);
 }
-
-
 
 $query = "SELECT * FROM video WHERE vid_type = 'movie'";
 $result = $conn->query($query);
@@ -64,13 +62,12 @@ echo '<table>';
         echo "<th><img src=".$row[thumbnail_reference]."></th>";
         echo "<th>".$row[title]."</th>";
         echo "<th>".$row[rating]."</th>";
-        echo "<th>".$row[runtime]. "</th>";
+        echo "<th>".$row[runtime]."</th>";
     echo "</tr>";
 
 }
 
 echo '</table>';
-
-
 ?>
+
 </body>
