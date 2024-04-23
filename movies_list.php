@@ -45,7 +45,7 @@ th{
     <h1>Movies</h1>
 
 <?php
-include '/users/kent/student/sopatz/config.inc';
+include '../config.inc';
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error){
@@ -55,7 +55,7 @@ if ($conn->connect_error){
 session_start();
 $user_ID = $_SESSION["user_ID"];
 if (!$user_ID){
-  die("<h2>Oops! Looks like you're not logged in</h2>");
+  die("<h1>Oops! Looks like you're not logged in</h1>");
 }
 
 $result = $conn->query("SELECT subsc_plan FROM user WHERE ID = '" . $user_ID . "'");

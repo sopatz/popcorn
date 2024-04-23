@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Video Player</title>
+  <title>Watchlist</title>
   <link rel="stylesheet" href="allPages.css">
   <style>
     h1 {
@@ -58,7 +58,7 @@
       echo "Your user ID is " . $user_ID; //Just for testing purposes
     ?>
     <?php
-    include '/users/kent/student/sopatz/config.inc';
+    include '../config.inc';
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     if ($conn->connect_error){
