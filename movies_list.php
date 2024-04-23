@@ -45,7 +45,7 @@ th{
     <h1>Movies</h1>
 
 <?php
-include '../config.inc';
+include '/users/kent/student/sopatz/config.inc';
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error){
