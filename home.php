@@ -78,7 +78,7 @@ h2 {
   </section>
 </div>
 
-<a href="start.html" class="popbutton" style="padding:15px; position:absolute; right:3%; top:50px">Logout</a>
+<a href="start.php" class="popbutton" style="padding:15px; position:absolute; right:3%; top:50px">Logout</a>
 
 </body>
 </html>

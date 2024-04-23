@@ -41,7 +41,7 @@ th{
         </ul>
       </div>
     </section>
-    <a href="start.html" class="popbutton" style="padding:15px; position:absolute; right:3%; top:50px">Logout</a>
+    <a href="start.php" class="popbutton" style="padding:15px; position:absolute; right:3%; top:50px">Logout</a>
     <h1>Shows</h1>
 
 <?php //This is how to pass the user's ID to any page
