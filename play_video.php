@@ -39,15 +39,32 @@ h1 {
       </div>
     </section>
 <a href="start.php" class="popbutton" style="padding:15px; position:absolute; right:3%; top:50px">Logout</a>
-<h1>Title of Movie</h1>
 
-<div class="center">
-   <video width="1280" height="720" controls>
-    <source src="movie.mp4" type="video/mp4">
-    <source src="movie.ogg" type="video/ogg">
-    Your browser does not support the video tag.
-  </video>
-</div>
+<?php
+  include '../config.inc';
+  $conn = new mysqli($servername, $username, $password, $dbname);
+
+  if ($conn->connect_error){
+    echo '<p>Connetcion Failed!</p>';
+    die("Connetction Failed:" . $conn->connect_error);
+  }
+
+  $find_video = "SELECT * FROM video WHERE ID = '" . $_GET["video_ID"] . "'";
+  $found_video = $conn->query($find_video);
+  $video = $found_video->fetch_assoc();
+  echo "<h1>" . $video["title"] . "</h1><br>";
+
+  echo "<div class='center'>
+          <video width='1280' height='720' controls>
+            <source src=" . $video["video_reference"] . " type='video/mp4'>
+          Your browser does not support the video tag.
+          </video>
+        </div>";
+
+  echo "<p style='text-align:center'>" . $video["synopsis"] . "</p>";
+
+  $conn->close();
+?>
 
 </body>
 </html>

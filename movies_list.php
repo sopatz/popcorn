@@ -25,6 +25,15 @@ th{
     margin: 0;
 }
 
+th input {
+    background:none;
+    border: none;
+    padding: 0;
+    font-family: Tahoma;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 </style>
 
 </head>
@@ -70,10 +79,14 @@ else {
 $result = $conn->query($query);
 echo '<table>';
 
- while ($row = $result->fetch_assoc()) {
+while ($row = $result->fetch_assoc()) {
     echo "<tr>";
         echo "<th><img src=".$row[thumbnail_reference]."></th>";
-        echo "<th>".$row[title]."</th>";
+        echo "<th><form action='play_video.php' method=get>
+                    <input type=hidden name='video_ID' value=$row[ID]>
+                    <input type=submit value=$row[title]>
+              </form>
+              </th>";
         echo "<th>".$row[rating]."</th>";
         echo "<th>".$row[runtime]."</th>";
     echo "</tr>";
