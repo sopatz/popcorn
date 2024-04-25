@@ -32,6 +32,8 @@ th input {
     font-family: Tahoma;
     text-decoration: underline;
     cursor: pointer;
+    font-size:16px;
+    font-weight: bold;
 }
 
 </style>

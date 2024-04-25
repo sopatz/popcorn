@@ -1,6 +1,8 @@
 <html>
 
-    <head> </head>
+    <head>
+      <link rel=stylesheet href=allPages.css>
+    </head>
     <body>
 
         <form action="add_video.php" method=get>
@@ -91,7 +93,9 @@
                 $conn->close();
             }
         ?>
-
+        <br>
+        <a href="add_series.php" class="popbutton" style="padding:10px">Add Series</a>
+        <a href="start.php" class="popbutton" style="padding:10px;">Start Page</a>
     </body>
 
 </html>
