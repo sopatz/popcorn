@@ -31,7 +31,18 @@
         border: 3px solid #000000;
         padding: 0;
         margin: 0;
-    }`
+    }
+    th input {
+        background:none;
+        border: none;
+        padding: 0;
+        font-family: Tahoma;
+        text-decoration: underline;
+        cursor: pointer;
+        font-size:16px;
+        font-weight: bold;
+    }
+
   </style>
 </head>
 
@@ -49,15 +60,13 @@
     </section>
     <a href="start.php" class="popbutton" style="padding:15px; position:absolute; right:3%; top:50px">Logout</a>
     <h1>Your Watchlist</h1>
+
     <?php //This is how to pass the user's ID to any page
-      session_start();
-      $user_ID = $_SESSION["user_ID"];
-      if (!$user_ID){
-        die("<h2>Oops! Looks like you're not logged in</h2>");
-      }
-      echo "Your user ID is " . $user_ID; //Just for testing purposes
-    ?>
-    <?php
+    session_start();
+    $user_ID = $_SESSION["user_ID"];
+    if (!$user_ID){
+      die("<h2>Oops! Looks like you're not logged in</h2>");
+    }
     include '../config.inc';
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -79,15 +88,18 @@
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
             echo "<th><img src=".$row[thumbnail_reference]."></th>";
-            echo "<th>".$row[title]."</th>";
+            echo "<th><form action='episode_list.php' method=get>
+                    <input type=hidden name='series_ID' value=$row[ID]>
+                    <input type=submit value=$row[title]>
+                  </form>
+                  </th>";
             echo "<th>".$row[rating]."</th>";
             echo "<th>".$row[num_of_eps]. "</th>";
 
-            echo '<th style="width: 10%;"><form method="GET"> 
+            echo '<th style="width: 10%;"><form method="GET">
                       <button class="popbutton" type="submit" name="remove" value="'. $row[ID] .'">Remove from Watchlist</button>
                     </form>
                   </th>';
-
         echo "</tr>";
     }
 

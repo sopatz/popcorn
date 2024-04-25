@@ -64,7 +64,6 @@ h2 {
 <?php //This is how to pass the user's ID to any page
   session_start();
   $user_ID = $_SESSION["user_ID"];
-  echo "Your user ID is " . $user_ID; //Just for testing purposes
 ?>
 
 <div class="center">

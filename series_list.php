@@ -9,7 +9,7 @@ h1 {
   font-size: 40px;
   text-align: center;
   width: auto;
-  margin-top: 30PX;
+  margin-top: 30px;
 }
 
 table{
@@ -23,6 +23,16 @@ th{
     border: 3px solid #000000;
     padding: 0;
     margin: 0;
+}
+th input {
+    background:none;
+    border: none;
+    padding: 0;
+    font-family: Tahoma;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size:16px;
+    font-weight: bold;
 }
 
 </style>
@@ -50,7 +60,6 @@ th{
   if (!$user_ID){
     die("<p>Looks like you're not logged in</p>");
   }
-  echo "Your user ID is " . $user_ID; //Just for testing purposes
 ?>
 
 <?php
@@ -69,7 +78,11 @@ echo '<table>';
  while ($row = $result->fetch_assoc()) {
     echo "<tr>";
         echo "<th><img src=".$row[thumbnail_reference]."></th>";
-        echo "<th>".$row[title]."</th>";
+        echo "<th><form action='episode_list.php' method=get>
+                    <input type=hidden name='series_ID' value=$row[ID]>
+                    <input type=submit value=$row[title]>
+              </form>
+              </th>";
         echo "<th>".$row[rating]."</th>";
         echo "<th>".$row[num_of_eps]. "</th>";
 
