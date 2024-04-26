@@ -59,25 +59,32 @@ h2 {
   </div>
 </section>
 
-<h1>Welcome to Popcorn</h1>
+<div>
+  <h1>Welcome to Popcorn</h1>
+</div>
 
 <?php //This is how to pass the user's ID to any page
   session_start();
   $user_ID = $_SESSION["user_ID"];
 ?>
 
-<div class="center">
-  <section class="movies">
-    <a href="movies_list.php"><img src="images/placeholder.png" alt="movie pic"></a>
-    <h2><a href="movies_list.php" style="text-decoration:none; color:black;">Movies</a></h2>
-  </section>
-  <section class="tv">
-    <a href="series_list.php"><img src="images/placeholder.png" alt="tv pic"></a>
-    <h2><a href="series_list.php" style="text-decoration:none; color:black;">Tv</a></h2>
-  </section>
+<div style="margin-right: auto; margin-left: auto; width: 90%; display: flex; align-items: center; justify-content: center;">
+  <div style="margin: 50px;">
+    <a href="movies_list.php"><img src="images/movie-clapper-open-svgrepo-com.svg" alt="movie pic" style="width: 275px;"></a>
+    <div style="display: flex; margin-top: 30px;"><a href="movies_list.php" style="text-decoration:none; color:black; font-size: xxx-large;"><strong>Movies</strong></a></div>
+</div>
+  <div style="margin: 50px;">
+    <a href="series_list.php"><img src="images/television-televisions-svgrepo-com.svg" alt="tv pic" style="width: 275px;"></a>
+    <div style="display: flex; margin-top: 30px;"><a href="series_list.php" style="text-decoration:none; color:black; font-size: xxx-large; margin-left: auto;"><strong>TV Shows</strong></a></div>
+</div>
 </div>
 
 <a href="start.php" class="popbutton" style="padding:15px; position:absolute; right:3%; top:50px">Logout</a>
+<h3>For Testing:</h3>
+  <a href="add_series.php" style="color:black;">Add series</a><br>
+  <a href="add_video.php" style="color:black;">Add video</a><br>
+  <a href="remove_videos.php" style="color:black;">Remove video/series</a><br>
+  <a href="log_in.php" style="color:black;">Login</a>
 
 </body>
 </html>

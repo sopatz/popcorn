@@ -49,7 +49,7 @@
             <input type=hidden name="form_submitted" value="1">
         </form>
         <?php
-            include '/users/kent/student/sopatz/config.inc';
+            include '../config.inc';
             if (isset($_GET["form_submitted"])) {
                 $conn = new mysqli($servername, $username, $password, $dbname);
                 if ($conn->connect_error) {

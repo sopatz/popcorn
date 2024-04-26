@@ -15,7 +15,7 @@
         </form>
 
         <?php
-            include '/users/kent/student/sopatz/config.inc';
+            include '../config.inc';
             if (isset($_GET["form_submitted"])) {
                 if ($_GET["title"] == "") {
                     echo "A title is required, please try again.";
@@ -28,7 +28,7 @@
 
                     $title = $conn->real_escape_string($_GET["title"]);
                     $synopsis = $conn->real_escape_string($_GET["synopsis"]);
-                    $thumb_ref = $conn->real_escape_string($_GET["synopsis"]);
+                    $thumb_ref = $conn->real_escape_string($_GET["thumb_ref"]);
 
                     $insert = "INSERT INTO series (title, synopsis, rating, thumbnail_reference) VALUES ('" . $title . "', '" . $synopsis . "', '" . $_GET["rating"] . "', '" . $thumb_ref . "')";
                     $result = $conn->query($insert);

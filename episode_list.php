@@ -76,27 +76,30 @@ $result = $conn->query("SELECT subsc_plan FROM user WHERE ID = '" . $user_ID . "
 $plan = $result->fetch_assoc()["subsc_plan"];
 
 if ($plan == "basic") {
-  $query = "SELECT * FROM video WHERE vid_type = 'episode' AND subsc_plan_required = 'basic' AND ID IN 
+  $query = "SELECT * FROM video, is_part_of WHERE vid_type = 'episode' AND subsc_plan_required = 'basic' AND is_part_of.video_ID = video.ID AND ID IN 
            (SELECT video_ID from is_part_of WHERE series_ID = '" . $_GET["series_ID"] . "')";
 }
 else {
-  $query = "SELECT * FROM video WHERE vid_type = 'episode' AND ID IN 
+  $query = "SELECT * FROM video, is_part_of WHERE vid_type = 'episode' AND is_part_of.video_ID = video.ID AND ID IN 
            (SELECT video_ID from is_part_of WHERE series_ID = '" . $_GET["series_ID"] . "')";
 }
 $result = $conn->query($query);
 echo '<table>';
 
 while ($row = $result->fetch_assoc()) {
-    echo "<tr>";
-        echo "<th><img src=".$row[thumbnail_reference]."></th>";
-        echo "<th><form action='play_video.php' method=get>
-                    <input type=hidden name='video_ID' value=$row[ID]>
-                    <input type=submit value=$row[title]>
-              </form>
-              </th>";
-        echo "<th>".$row[rating]."</th>";
-        echo "<th>".$row[runtime]."</th>";
-    echo "</tr>";
+  echo "<tr>";
+  echo '<th style="width: 135px;"><img src='.$row[thumbnail_reference].' style="width: 135px; height: 200px;"></th>';
+  echo '<th style="min-width: 100px;">
+            <form action="play_video.php" method="get">
+              <input type="hidden" name="video_ID" value="'.$row[ID].'">
+              <input type="submit" value="'.$row[title].'">
+            </form>
+        </th>';
+  echo "<th>".$row[synopsis]."</th>";
+  echo '<th style="min-width: 50px;">'.$row[rating].'</th>';
+  echo "<th>".$row[runtime]."</th>";
+  echo "<th>Season: ".$row[season_number]."<br>Episode: ".$row[episode_number]."</th>";
+  echo "</tr>";
 
 }
 

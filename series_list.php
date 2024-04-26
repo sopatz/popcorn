@@ -54,6 +54,18 @@ th input {
     <a href="start.php" class="popbutton" style="padding:15px; position:absolute; right:3%; top:50px">Logout</a>
     <h1>Shows</h1>
 
+    <div style="display: flex; text-align: center; justify-content: center; align-items: center; margin-top: 25px;  margin-bottom: 30px;">
+    <div style="width: 375px; border: black 2px solid; border-radius: 20px; display: flex; text-align: center; justify-content: center; align-items: center;  background-color: white;">
+    <form method="GET" style="margin: 0;">
+        <table>
+            <tr>
+                <td><input type="text" name="search" placeholder="Search for a movie" style="height: 30px; width: 300px; border: none; outline:none;"></td><td><button type="submit" style="border:none; background-color: transparent; cursor: pointer;";><img src="images/search.png" style="width:30px"></button></td>
+            </tr>
+        </table>
+    </form>
+    </div>
+    </div>
+
 <?php //This is how to pass the user's ID to any page
   session_start();
   $user_ID = $_SESSION["user_ID"];
@@ -63,7 +75,7 @@ th input {
 ?>
 
 <?php
-include '/users/kent/student/sopatz/config.inc';
+include '../config.inc';
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error){
@@ -71,20 +83,71 @@ if ($conn->connect_error){
   die("Connetction Failed:" . $conn->connect_error);
 }
 
+if(array_key_exists('search', $_GET)) { 
+  $search = $_GET["search"];
+  //echo "<br>Search: " . $search;
+  $query = "SELECT * FROM series WHERE title LIKE '%".$search."%'";
+  //echo $query;
+  $result = $conn->query($query);
+  if ($result === false) {
+    echo "Query failed: " . $conn->error;
+  } else {
+    //echo "Query succeeded";
+  }
+  if ($result->num_rows > 0) {
+    echo '<table>';
+
+    while ($row = $result->fetch_assoc()) {
+      echo "<tr>";
+      echo '<th style="width: 135px;"><img src='.$row[thumbnail_reference].' style="width: 135px; height: 200px;"></th>';
+      echo '<th style="width: 20%;"><form action="episode_list.php" method="get">
+              <input type=hidden name="series_ID" value="'.$row[ID].'">
+              <input type=submit value="'.$row[title].'">
+              </form>
+            </th>';
+      echo "<th>".$row[synopsis]."</th>";
+      echo '<th style="min-width: 50px;">'.$row[rating].'</th>';
+
+      //Checks to see if the series is watchlisted, then echos the button to add/remove from watchlist
+      $query = "SELECT * FROM watchlist WHERE watchlist.user_ID = '" .$user_ID. "' AND watchlist.series_ID = '" .$row[ID]. "';";
+      $q_result = $conn->query($query);
+        
+      $check = $q_result->num_rows;
+      if ($check == 0) {
+        echo '<th style="width: 10%;"><form method="GET"> 
+                <button class="popbutton" type="submit" name="add" value="'. $row[ID] .'">Add to Watchlist</button>
+              </form>
+              </th>';
+      }
+      else{
+        echo '<th style="width: 10%;"><form method="GET"> 
+                <button class="popbutton" type="submit" name="remove" value="'. $row[ID] .'">Remove from Watchlist</button>
+              </form>
+              </th>';
+      }
+      echo "</tr>";
+    }
+
+    die("</table>");
+  } else {
+    die("<h1>No results found</h1>");
+  }
+}
+
 $query = "SELECT * FROM series";
 $result = $conn->query($query);
 echo '<table>';
 
  while ($row = $result->fetch_assoc()) {
-    echo "<tr>";
-        echo "<th><img src=".$row[thumbnail_reference]."></th>";
-        echo "<th><form action='episode_list.php' method=get>
-                    <input type=hidden name='series_ID' value=$row[ID]>
-                    <input type=submit value=$row[title]>
-              </form>
-              </th>";
-        echo "<th>".$row[rating]."</th>";
-        echo "<th>".$row[num_of_eps]. "</th>";
+  echo "<tr>";
+  echo '<th style="width: 135px;"><img src='.$row[thumbnail_reference].' style="width: 135px; height: 200px;"></th>';
+  echo '<th style="width: 20%;"><form action="episode_list.php" method="get">
+              <input type=hidden name="series_ID" value="'.$row[ID].'">
+              <input type=submit value="'.$row[title].'">
+        </form>
+        </th>';
+  echo "<th>".$row[synopsis]."</th>";
+  echo '<th style="min-width: 50px;">'.$row[rating].'</th>';
 
         //Checks to see if the series is watchlisted, then echos the button to add/remove from watchlist
         $query = "SELECT * FROM watchlist WHERE watchlist.user_ID = '" .$user_ID. "' AND watchlist.series_ID = '" .$row[ID]. "';";
@@ -124,7 +187,7 @@ if(array_key_exists('remove', $_GET)) {
 
 
 function add_to_watchlist() { 
-  include '/users/kent/student/sopatz/config.inc';
+  include '../config.inc';
   $conn = new mysqli($servername, $username, $password, $dbname);
   $user_ID = $_SESSION["user_ID"];
 
@@ -145,7 +208,7 @@ function add_to_watchlist() {
 }
 
 function remove_from_watchlist() { 
-  include '/users/kent/student/sopatz/config.inc';
+  include '../config.inc';
   $conn = new mysqli($servername, $username, $password, $dbname);
   $user_ID = $_SESSION["user_ID"];
 

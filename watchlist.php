@@ -86,15 +86,15 @@
     echo '<table>';
 
     while ($row = $result->fetch_assoc()) {
-        echo "<tr>";
-            echo "<th><img src=".$row[thumbnail_reference]."></th>";
-            echo "<th><form action='episode_list.php' method=get>
-                    <input type=hidden name='series_ID' value=$row[ID]>
-                    <input type=submit value=$row[title]>
-                  </form>
-                  </th>";
-            echo "<th>".$row[rating]."</th>";
-            echo "<th>".$row[num_of_eps]. "</th>";
+      echo "<tr>";
+      echo '<th style="width: 135px;"><img src='.$row[thumbnail_reference].' style="width: 135px; height: 200px;"></th>';
+      echo '<th style="width: 20%;"><form action="episode_list.php" method="get">
+                  <input type=hidden name="series_ID" value="'.$row[ID].'">
+                  <input type=submit value="'.$row[title].'">
+            </form>
+            </th>';
+      echo "<th>".$row[synopsis]."</th>";
+      echo '<th style="min-width: 50px;">'.$row[rating].'</th>';
 
             echo '<th style="width: 10%;"><form method="GET">
                       <button class="popbutton" type="submit" name="remove" value="'. $row[ID] .'">Remove from Watchlist</button>
@@ -114,7 +114,7 @@ if(array_key_exists('remove', $_GET)) {
 } 
 
 function remove_from_watchlist() { 
-  include '/users/kent/student/sopatz/config.inc';
+  include '../config.inc';
   $conn = new mysqli($servername, $username, $password, $dbname);
   $user_ID = $_SESSION["user_ID"];
 
