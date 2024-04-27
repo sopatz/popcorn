@@ -1,7 +1,13 @@
 <html>
-  <head><title>Sign-Up</title></head>
+  <head>
+    <title>Sign-Up</title>
+    <link rel=stylesheet href="allPages.css">
+  </head>
 
   <body>
+    <div class="centerbox" style="height: 425px;"></div>
+    <div class="centerform">
+    <h1 style="text-align: center; bottom: relative;">Sign Up</h1>
     <p>Please enter your info:</p>
     <form action="sign_up.php" method=get>
       Enter Username: <input type=text size=30 name="username"><p></p>
@@ -217,9 +223,14 @@
                 <option value="Zimbabwe">Zimbabwe</option>
             </select>
 
-      <p></p><input type=submit value="Submit">
+      <p></p><input type=submit class="popbutton" style="padding: 20px 40px" value="Submit">
       <input type="hidden" name="form_submitted" value="1">
     </form>
+    </div>
+
+    <div style="position:absolute; top:50%; left:50%; transform: translate(-50%, 350%);">
+      <h2>Log in here: <a href="log_in.php" class="popbutton" style="padding: 20px 40px">Log in</a></h2>
+    </div>
 
     <?php
     if (isset($_GET["form_submitted"])) {
@@ -247,7 +258,6 @@
         $conn->close();
     }
     ?>
-    <p><a href="log_in.php">Log-In</a></p>
   </body>
 
 </html>

@@ -1,15 +1,20 @@
 <html>
 
-  <head> </head>
+  <head>
+    <link rel=stylesheet href="allPages.css">
+  </head>
 
   <body>
-
-    <form action="log_in.php" method=get>
-      Username: <input type=text size=30 name="username"><p></p>
-      Password: <input type=password size=30 name="password"><p></p>
-      <input type=submit value="Submit">
-      <input type=hidden name="form_submitted" value="1">
-    </form>
+    <div class="centerbox"></div>
+    <div class="centerform">
+      <h1 style="text-align: center; bottom: relative;">Log in</h1><br>
+      <form action="log_in.php" method=get>
+        Username: <input type=text size=30 name="username"><p></p>
+        Password: <input type=password size=30 name="password"><p></p><br>
+        <input type=submit class="popbutton" style="padding: 20px 40px" value="Submit">
+        <input type=hidden name="form_submitted" value="1">
+      </form>
+    </div>
 
   <?php
     if (isset($_GET["form_submitted"])) {

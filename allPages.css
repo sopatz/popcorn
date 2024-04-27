@@ -58,3 +58,25 @@ body {
 .nav a:hover {
     color:black;
 }
+
+.centerbox {
+    width:500px;
+    height:350px;
+    background-color:#dddddd;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    margin:0;
+    border: 2px solid black;
+    border-radius:20px;
+}
+
+.centerform {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    text-align:center;
+    margin:0;     
+}
