@@ -16,6 +16,7 @@ create table user
      subsc_plan       varchar(10) not null,
      subsc_renew_date date,
      location         varchar(60) not null,
+     color            varchar(7) not null DEFAULT '#DA1035',
      primary key (ID)
     );
 
@@ -31,14 +32,6 @@ create table video
      vid_type            varchar(7) not null,
      genre               varchar(20),
      primary key(ID)
-    );
-
-create table countries_available
-    (video_ID     int,
-     country_name varchar(56),
-     primary key(video_ID, country_name),
-     foreign key (video_ID) references video (ID)
-        on delete cascade
     );
 
 create table watches

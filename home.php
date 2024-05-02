@@ -46,15 +46,36 @@ h2 {
 </style>
 </head>
 
-<body>
+<?php
+  //Testing if the user is logged in and setting the user's custom background color
+  session_start();
+  $user_ID = $_SESSION["user_ID"];
+  if (!$user_ID){
+    die("<h2>Oops! Looks like you're not logged in</h2>");
+  }
+
+   include '../config.inc';
+  $conn = new mysqli($servername, $username, $password, $dbname);
+
+  if ($conn->connect_error) {
+      die("Connection Failed: " . $conn->connect_error);
+  }
+
+  $select_color = "SELECT color FROM user WHERE ID = '" . $user_ID . "'";
+  $result = $conn->query($select_color);
+  $back_color = $result->fetch_assoc()["color"];
+  $_SESSION["back_color"] = $back_color;
+
+  echo "<body style='background-color:" . $back_color . "'>";
+?>
 <section>
 <div>
   <img src="images/logo2.png" alt="popcorn graphic" class="logo">
     <ul class ="nav">
       <li><a href="home.php">Home</a></li>
       <li><a href="watchlist.php">Watchlist</a></li>
-      <li><a href="#account">Account</a></li>
-      <li><a href="#settings">Settings</a></li>
+      <li><a href="account.php">Account</a></li>
+      <li><a href="settings.php">Settings</a></li>
     </ul>
   </div>
 </section>
@@ -62,11 +83,6 @@ h2 {
 <div>
   <h1>Welcome to Popcorn</h1>
 </div>
-
-<?php //This is how to pass the user's ID to any page
-  session_start();
-  $user_ID = $_SESSION["user_ID"];
-?>
 
 <div style="margin-right: auto; margin-left: auto; width: 90%; display: flex; align-items: center; justify-content: center;">
   <div style="margin: 50px;">

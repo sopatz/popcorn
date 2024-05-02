@@ -40,15 +40,24 @@ th input {
 
 </head>
 
-<body>
+<?php
+  //Testing if the user is logged in and setting the user's custom background color
+  session_start();
+  $user_ID = $_SESSION["user_ID"];
+  if (!$user_ID){
+    die("<h2>Oops! Looks like you're not logged in</h2>");
+  }
+  $back_color = $_SESSION["back_color"];
+  echo "<body style='background-color:" . $back_color . "'>";
+?>
     <section>
     <div>
       <img src="images/logo2.png" alt="" class="logo">
         <ul class ="nav">
           <li><a href="home.php">Home</a></li>
           <li><a href="watchlist.php">Watchlist</a></li>
-          <li><a href="#account">Account</a></li>
-          <li><a href="#settings">Settings</a></li>
+          <li><a href="account.php">Account</a></li>
+          <li><a href="settings.php">Settings</a></li>
         </ul>
       </div>
     </section>
@@ -75,13 +84,8 @@ if ($conn->connect_error){
   echo '<p>Connetcion Failed!</p>';
   die("Connetction Failed:" . $conn->connect_error);
 }
-session_start();
-$user_ID = $_SESSION["user_ID"];
-if (!$user_ID){
-  die("<h1>Oops! Looks like you're not logged in</h1>");
-}
 
-if(array_key_exists('search', $_GET)) { 
+if(array_key_exists('search', $_GET)) {
   $search = $_GET["search"];
   //echo "<br>Search: " . $search;
   $query = "SELECT * FROM video WHERE video.vid_type = 'movie' AND video.title LIKE '%".$search."%'";

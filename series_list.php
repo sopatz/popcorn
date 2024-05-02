@@ -39,15 +39,24 @@ th input {
 
 </head>
 
-<body>
+<?php
+  //Testing if the user is logged in and setting the user's custom background color
+  session_start();
+  $user_ID = $_SESSION["user_ID"];
+  if (!$user_ID){
+    die("<h2>Oops! Looks like you're not logged in</h2>");
+  }
+  $back_color = $_SESSION["back_color"];
+  echo "<body style='background-color:" . $back_color . "'>";
+?>
     <section>
     <div>
       <img src="images/logo2.png" alt="" class="logo">
         <ul class ="nav">
           <li><a href="home.php">Home</a></li>
           <li><a href="watchlist.php">Watchlist</a></li>
-          <li><a href="#account">Account</a></li>
-          <li><a href="#settings">Settings</a></li>
+          <li><a href="account.php">Account</a></li>
+          <li><a href="settings.php">Settings</a></li>
         </ul>
       </div>
     </section>
@@ -59,20 +68,12 @@ th input {
     <form method="GET" style="margin: 0;">
         <table>
             <tr>
-                <td><input type="text" name="search" placeholder="Search for a movie" style="height: 30px; width: 300px; border: none; outline:none;"></td><td><button type="submit" style="border:none; background-color: transparent; cursor: pointer;";><img src="images/search.png" style="width:30px"></button></td>
+                <td><input type="text" name="search" placeholder="Search for a series" style="height: 30px; width: 300px; border: none; outline:none;"></td><td><button type="submit" style="border:none; background-color: transparent; cursor: pointer;";><img src="images/search.png" style="width:30px"></button></td>
             </tr>
         </table>
     </form>
     </div>
     </div>
-
-<?php //This is how to pass the user's ID to any page
-  session_start();
-  $user_ID = $_SESSION["user_ID"];
-  if (!$user_ID){
-    die("<p>Looks like you're not logged in</p>");
-  }
-?>
 
 <?php
 include '../config.inc';
@@ -83,7 +84,7 @@ if ($conn->connect_error){
   die("Connetction Failed:" . $conn->connect_error);
 }
 
-if(array_key_exists('search', $_GET)) { 
+if(array_key_exists('search', $_GET)) {
   $search = $_GET["search"];
   //echo "<br>Search: " . $search;
   $query = "SELECT * FROM series WHERE title LIKE '%".$search."%'";
@@ -111,16 +112,16 @@ if(array_key_exists('search', $_GET)) {
       //Checks to see if the series is watchlisted, then echos the button to add/remove from watchlist
       $query = "SELECT * FROM watchlist WHERE watchlist.user_ID = '" .$user_ID. "' AND watchlist.series_ID = '" .$row[ID]. "';";
       $q_result = $conn->query($query);
-        
+
       $check = $q_result->num_rows;
       if ($check == 0) {
-        echo '<th style="width: 10%;"><form method="GET"> 
+        echo '<th style="width: 10%;"><form method="GET">
                 <button class="popbutton" type="submit" name="add" value="'. $row[ID] .'">Add to Watchlist</button>
               </form>
               </th>';
       }
       else{
-        echo '<th style="width: 10%;"><form method="GET"> 
+        echo '<th style="width: 10%;"><form method="GET">
                 <button class="popbutton" type="submit" name="remove" value="'. $row[ID] .'">Remove from Watchlist</button>
               </form>
               </th>';
@@ -152,16 +153,16 @@ echo '<table>';
         //Checks to see if the series is watchlisted, then echos the button to add/remove from watchlist
         $query = "SELECT * FROM watchlist WHERE watchlist.user_ID = '" .$user_ID. "' AND watchlist.series_ID = '" .$row[ID]. "';";
         $q_result = $conn->query($query);
-        
+
         $check = $q_result->num_rows;
         if ($check == 0) {
-          echo '<th style="width: 10%;"><form method="GET"> 
+          echo '<th style="width: 10%;"><form method="GET">
                       <button class="popbutton" type="submit" name="add" value="'. $row[ID] .'">Add to Watchlist</button>
                     </form>
                 </th>';
         }
         else{
-          echo '<th style="width: 10%;"><form method="GET"> 
+          echo '<th style="width: 10%;"><form method="GET">
                     <button class="popbutton" type="submit" name="remove" value="'. $row[ID] .'">Remove from Watchlist</button>
                   </form>
                 </th>';
@@ -176,17 +177,17 @@ echo '</table>';
 
 <?php
 //Functions to add/remove things from watchlist
-if(array_key_exists('add', $_GET)) { 
+if(array_key_exists('add', $_GET)) {
   //echo "add button pressed";
-  add_to_watchlist(); 
-} 
-if(array_key_exists('remove', $_GET)) { 
+  add_to_watchlist();
+}
+if(array_key_exists('remove', $_GET)) {
   //echo "remove button pressed";
-  remove_from_watchlist(); 
-} 
+  remove_from_watchlist();
+}
 
 
-function add_to_watchlist() { 
+function add_to_watchlist() {
   include '../config.inc';
   $conn = new mysqli($servername, $username, $password, $dbname);
   $user_ID = $_SESSION["user_ID"];
@@ -207,7 +208,7 @@ function add_to_watchlist() {
   else echo "Series failed to add, please try again";
 }
 
-function remove_from_watchlist() { 
+function remove_from_watchlist() {
   include '../config.inc';
   $conn = new mysqli($servername, $username, $password, $dbname);
   $user_ID = $_SESSION["user_ID"];
