@@ -27,16 +27,20 @@
     </section>
     <a href="start.php" class="popbutton" style="padding:15px; position:absolute; right:3%; top:50px">Logout</a>
 
+    <div class="centerform">
     <form action="settings.php" method=post>
-      <label for="color">Select Background Color: </label><span style="display: inline; float: none;"></span>
-      <select id="color" name="color" class="form-control">
+      <label for="color" style="font-size:150%; text-decoration:underline;"><b>Select Background Color: </b></label><p></p>
+      <span style="display: inline; float: none;"></span>
+      <select id="color" name="color" class="form-control" style="font-size:130%; border:1px solid black;">
         <option value="#DA1035">Red</option>
         <option value="#990000">Dark Red</option>
         <option value="#FF5423">Tomato</option>
         <option value="#FF8674">Salmon</option>
         <option value="#FFA500">Orange</option>
-        <option value="#F6BE00">Gold</option>
-        <option value="#F9DB24">Yellow</option>
+        <option value="#F6BE00">Orange Yellow</option>
+        <option value="#FFFFC2">Pastel Yellow</option>
+        <option value="#F9DB24">Gold</option>
+        <option value="#FFFF33">Yellow</option>
         <option value="#ADFC3E">Chartreuse</option>
         <option value="#CFE0C3">Pale Green</option>
         <option value="#5FFB17">Lime Green</option>
@@ -58,12 +62,24 @@
         <option value="#F9B7FF">Light Pink</option>
         <option value="#FF33AA">Hot Pink</option>
         <option value="#C12283">Dark Fuchsia</option>
-
+        <option value="#CD7F32">Bronze</option>
+        <option value="#C58917">Cinnamon</option>
+        <option value="#ECE5B6">Tan</option>
+        <option value="#B1907F">Light Brown</option>
+        <option value="#806517">Brown</option>
+        <option value="#644117">Dark Brown</option>
+        <option value="#7F462C">Sepia</option>
+        <option value="#8A865D">Khaki</option>
+        <option value="#D3D3D3">Light Gray</option>
+        <option value="#A8A9AD">Gray</option>
+        <option value="#F8F0E3">Cream</option>
+        <option value="#FEFCFF">White</option>
       </select><p></p>
-
+      <br><br>
       <input type=submit class="popbutton" style="padding: 20px 40px" value="Save">
       <input type="hidden" name="form_submitted" value="1">
     </form>
+    </div>
 
     <?php
     if (isset($_POST["form_submitted"])) {
