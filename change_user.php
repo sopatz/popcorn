@@ -22,7 +22,7 @@
     echo "<body style='background-color:" . $back_color . "'>";
   ?>
 
-  <div class="centerbox" style="height:375px"></div>
+  <div class="centerbox" style="height:52%; width:30%"></div>
   <div class="centerform">
     <h1 style="text-align: center; bottom: relative; text-decoration:underline;">Change Username</h1><br>
     <?php

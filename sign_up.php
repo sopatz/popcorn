@@ -6,7 +6,7 @@
       p {
         text-align: center;
         position: relative;
-        top: 77%;
+        top: 82%;
         color: white;
         font-weight: bold;
       }
@@ -14,7 +14,7 @@
   </head>
 
   <body>
-    <div class="centerbox" style="height: 425px;"></div>
+    <div class="centerbox" style="height: 55%; width: 30%"></div>
     <div class="centerform">
       <h1 style="text-align: center; bottom: relative;">Sign Up</h1>
       <p style="color:black;">Please enter your info:</p>
@@ -237,7 +237,7 @@
       </form>
     </div>
 
-    <div style="position:absolute; top:20%; left:50%; transform: translate(-50%, -50%);">
+    <div style="position:absolute; top:15%; left:50%; transform: translate(-50%, -50%);">
       <h2>Log in here: <a href="log_in.php" class="popbutton" style="padding: 20px 40px">Log in</a></h2>
     </div>
 

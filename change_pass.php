@@ -22,7 +22,7 @@
     echo "<body style='background-color:" . $back_color . "'>";
   ?>
 
-  <div class="centerbox" style="height:385px"></div>
+  <div class="centerbox" style="height:54%; width:32%"></div>
   <div class="centerform">
     <h1 style="text-align: center; bottom: relative; text-decoration:underline;">Change Password</h1><br>
     <form action="change_pass.php" method=post>
