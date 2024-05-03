@@ -117,12 +117,12 @@
 
 <?php
 //Functions to remove things from watchlist
-if(array_key_exists('remove', $_GET)) { 
+if(array_key_exists('remove', $_GET)) {
   //echo "remove button pressed";
-  remove_from_watchlist(); 
-} 
+  remove_from_watchlist();
+}
 
-function remove_from_watchlist() { 
+function remove_from_watchlist() {
   include '../config.inc';
   $conn = new mysqli($servername, $username, $password, $dbname);
   $user_ID = $_SESSION["user_ID"];

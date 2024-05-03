@@ -64,7 +64,7 @@ h1 {
   echo "<h1>" . $video["title"] . "</h1><br>";
 
   echo "<div class='center'>
-          <video width='1280' height='720' controls>
+          <video width=100% height=68% controls>
             <source src=" . $video["video_reference"] . " type='video/mp4'>
           Your browser does not support the video tag.
           </video>

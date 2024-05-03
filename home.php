@@ -54,7 +54,7 @@ h2 {
     die("<h2>Oops! Looks like you're not logged in</h2>");
   }
 
-   include '../config.inc';
+  include '../config.inc';
   $conn = new mysqli($servername, $username, $password, $dbname);
 
   if ($conn->connect_error) {

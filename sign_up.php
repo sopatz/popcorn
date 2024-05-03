@@ -2,22 +2,31 @@
   <head>
     <title>Sign-Up</title>
     <link rel=stylesheet href="allPages.css">
+    <style>
+      p {
+        text-align: center;
+        position: relative;
+        top: 77%;
+        color: white;
+        font-weight: bold;
+      }
+    </style>
   </head>
 
   <body>
     <div class="centerbox" style="height: 425px;"></div>
     <div class="centerform">
-    <h1 style="text-align: center; bottom: relative;">Sign Up</h1>
-    <p>Please enter your info:</p>
-    <form action="sign_up.php" method=get>
-      Enter Username: <input type=text size=30 name="username"><p></p>
-      Enter Password: <input type=password size=30 name="password"><p></p>
-      Which subscription plan would you like to purchase? <br>
-      <input type=radio id="basic" name="subsc_plan" value="basic">
-      <label for="basic">Basic Subscription</label><br>
-      <input type=radio id="premium" name="subsc_plan" value="premium">
-      <label for="premium">Premium Subscription</label><p></p>
-      <label for="country">Country: </label><span style="display: inline; float: none;"></span>
+      <h1 style="text-align: center; bottom: relative;">Sign Up</h1>
+      <p style="color:black;">Please enter your info:</p>
+      <form action="sign_up.php" method=post>
+        Enter Username: <input type=text size=30 name="username"><p></p>
+        Enter Password: <input type=password size=30 name="password"><p></p>
+        Which subscription plan would you like to purchase? <br>
+        <input type=radio id="basic" name="subsc_plan" value="basic">
+        <label for="basic">Basic Subscription</label><br>
+        <input type=radio id="premium" name="subsc_plan" value="premium">
+        <label for="premium">Premium Subscription</label><p></p>
+        <label for="country">Country: </label><span style="display: inline; float: none;"></span>
             <select id="country" name="country" class="form-control">
                 <option value="Afghanistan">Afghanistan</option>
                 <option value="Albania">Albania</option>
@@ -223,41 +232,45 @@
                 <option value="Zimbabwe">Zimbabwe</option>
             </select>
 
-      <p></p><input type=submit class="popbutton" style="padding: 20px 40px" value="Submit">
-      <input type="hidden" name="form_submitted" value="1">
-    </form>
+        <p></p><input type=submit class="popbutton" style="padding: 20px 40px" value="Submit">
+        <input type="hidden" name="form_submitted" value="1">
+      </form>
     </div>
 
-    <div style="position:absolute; top:50%; left:50%; transform: translate(-50%, 350%);">
+    <div style="position:absolute; top:20%; left:50%; transform: translate(-50%, -50%);">
       <h2>Log in here: <a href="log_in.php" class="popbutton" style="padding: 20px 40px">Log in</a></h2>
     </div>
 
     <?php
-    if (isset($_GET["form_submitted"])) {
-        include '/users/kent/student/sopatz/config.inc';
+      if ($_POST["form_submitted"] == "1") {
+        include '../config.inc';
         $conn = new mysqli($servername, $username, $password, $dbname);
 
         if ($conn->connect_error) {
             die("Connection Failed: " . $conn->connect_error);
         }
-        if ($_GET["username"] ==  "" || $_GET["password"] == "") echo "Sign-up failed, please enter a valid username/password";
+        if ($_POST["username"] ==  "" || $_POST["password"] == "") {
+          echo "<p>Sign-up failed, please enter a valid username/password</p>";
+        }
+        else if (($_POST["subsc_plan"] != "basic") && ($_POST["subsc_plan"] != "premium")) {
+          echo "<p>Sign-up failed, must choose a subscription plan</p>";
+        }
         else {
           //Sanitizing inputs to protect from SQL injection
-          $user_username = $conn->real_escape_string($_GET["username"]);
-          $user_password = $conn->real_escape_string($_GET["password"]);
-          $subsc_plan = $conn->real_escape_string($_GET["subsc_plan"]);
-          $location = $conn->real_escape_string($_GET["country"]);
+          $user_username = $conn->real_escape_string($_POST["username"]);
+          $user_password = $conn->real_escape_string($_POST["password"]);
+          $subsc_plan = $conn->real_escape_string($_POST["subsc_plan"]);
+          $location = $conn->real_escape_string($_POST["country"]);
           $renew_date = date("Y-m-d", strtotime('+1 year'));
 
           $insert_user = "INSERT INTO user (username, password, subsc_plan, location, subsc_renew_date) VALUES ('" . $user_username . "', '" . $user_password . "', '" . $subsc_plan . "', '" . $location . "', '" . $renew_date . "');";
           $result = $conn->query($insert_user);
 
-          if ($result == 1) echo "Thank you, you have successfully signed up for Popcorn<p>You can now log in using your info below:";
-          else echo "That username has already been taken, please try a different one";
+          if ($result == 1) echo "<p>Thank you, you have successfully signed up for Popcorn</p><p>You can now log in using the button above:</p>";
+          else echo "<p>That username has already been taken, please try a different one</p>";
         }
         $conn->close();
-    }
+      }
     ?>
   </body>
-
 </html>

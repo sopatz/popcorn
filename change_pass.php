@@ -24,7 +24,7 @@
 
   <div class="centerbox" style="height:385px"></div>
   <div class="centerform">
-    <h1 style="text-align: center; bottom: relative;">Change Password</h1><br>
+    <h1 style="text-align: center; bottom: relative; text-decoration:underline;">Change Password</h1><br>
     <form action="change_pass.php" method=post>
       Current Password: <input type=password size=30 name="current_pass"><p></p>
       New Password: <input type=password size=30 name="new_pass"><p></p>
