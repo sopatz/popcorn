@@ -85,11 +85,11 @@ $result = $conn->query("SELECT subsc_plan FROM user WHERE ID = '" . $user_ID . "
 $plan = $result->fetch_assoc()["subsc_plan"];
 
 if ($plan == "basic") {
-  $query = "SELECT * FROM video, is_part_of WHERE vid_type = 'episode' AND subsc_plan_required = 'basic' AND is_part_of.video_ID = video.ID AND ID IN 
+  $query = "SELECT * FROM video, is_part_of WHERE subsc_plan_required = 'basic' AND is_part_of.video_ID = video.ID AND ID IN 
            (SELECT video_ID from is_part_of WHERE series_ID = '" . $_GET["series_ID"] . "')";
 }
 else {
-  $query = "SELECT * FROM video, is_part_of WHERE vid_type = 'episode' AND is_part_of.video_ID = video.ID AND ID IN 
+  $query = "SELECT * FROM video, is_part_of WHERE is_part_of.video_ID = video.ID AND ID IN 
            (SELECT video_ID from is_part_of WHERE series_ID = '" . $_GET["series_ID"] . "')";
 }
 $result = $conn->query($query);

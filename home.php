@@ -87,11 +87,11 @@ h2 {
 <div style="margin-right: auto; margin-left: auto; width: 90%; display: flex; align-items: center; justify-content: center;">
   <div style="margin: 50px;">
     <a href="movies_list.php"><img src="images/movie-clapper-open-svgrepo-com.svg" alt="movie pic" style="width: 275px;"></a>
-    <div style="display: flex; margin-top: 30px;"><a href="movies_list.php" style="text-decoration:none; color:black; font-size: xxx-large;"><strong>Movies</strong></a></div>
+    <div style="display: flex; margin-top: 30px;"><a href="movies_list.php" style="text-decoration:none; color:black; font-size: xxx-large; margin:auto;"><strong>Movies</strong></a></div>
 </div>
   <div style="margin: 50px;">
     <a href="series_list.php"><img src="images/television-televisions-svgrepo-com.svg" alt="tv pic" style="width: 275px;"></a>
-    <div style="display: flex; margin-top: 30px;"><a href="series_list.php" style="text-decoration:none; color:black; font-size: xxx-large; margin-left: auto;"><strong>TV Shows</strong></a></div>
+    <div style="display: flex; margin-top: 30px;"><a href="series_list.php" style="text-decoration:none; color:black; font-size: xxx-large; margin:auto;"><strong>Series</strong></a></div>
 </div>
 </div>
 
