@@ -88,7 +88,7 @@ if ($conn->connect_error){
 if(array_key_exists('search', $_GET)) {
   $search = $_GET["search"];
   //echo "<br>Search: " . $search;
-  $query = "SELECT * FROM video WHERE video.vid_type = 'movie' AND video.title LIKE '%".$search."%'";
+  $query = "SELECT * FROM video WHERE video.vid_type = 'movie' AND (video.title LIKE '%".$search."%' OR UPPER(video.genre) = UPPER('".$search."'))";
   //echo $query;
   $result = $conn->query($query);
   if ($result === false) {
