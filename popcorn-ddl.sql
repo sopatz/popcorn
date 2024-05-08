@@ -34,17 +34,6 @@ create table video
      primary key(ID)
     );
 
-create table watches
-    (video_ID           int,
-     user_ID            int,
-     time_through_video time,
-     primary key (video_ID, user_ID),
-     foreign key (video_ID) references video (ID)
-        on delete cascade,
-     foreign key (user_ID) references user (ID)
-        on delete cascade
-    );
-
 create table watchlist
     (user_ID   int,
      series_ID int,
